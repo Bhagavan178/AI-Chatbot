@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart ChatBot 🤖</title>
+    <style>
+        /* Overall Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Chat Container */
+        .chat-container {
+            width: 40%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            color: black;
+        }
+
+        /* Chat Box */
+        .chat-box {
+            height: 400px;
+            overflow-y: auto;
+            border: none;
+            padding: 10px;
+            background: #f4f4f9;
+            border-radius: 10px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* User Message Bubble */
+        .user-message {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 15px;
+            margin: 5px;
+            align-self: flex-end;
+            max-width: 75%;
+        }
+
+        /* Bot Message Bubble */
+        .bot-message {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border-radius: 15px;
+            margin: 5px;
+            align-self: flex-start;
+            max-width: 75%;
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            color: grey;
+            font-style: italic;
+            padding-left: 10px;
+        }
+
+        /* Input Box */
+        .input-container {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <h2>ChatBot Assistant 🤖</h2>
+        <div class="chat-box" id="chat-box"></div>
+        <p class="typing-indicator" id="typing-indicator" style="display: none;">Bot is typing...</p>
+        
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            let userMessage = document.getElementById("user-input").value.trim();
+            if (userMessage === "") return;
+
+            let chatBox = document.getElementById("chat-box");
+            let typingIndicator = document.getElementById("typing-indicator");
+
+            // Display user message
+            chatBox.innerHTML += `<div class='user-message'>${userMessage}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
+
+            // Show typing indicator
+            typingIndicator.style.display = "block";
+
+            // Send message to backend
+            fetch("/get_response", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userMessage })
+            })
+            .then(response => response.json())
+            .then(data => {
+                setTimeout(() => {
+                    typingIndicator.style.display = "none"; // Hide typing indicator
+                    chatBox.innerHTML += `<div class='bot-message'>${data.response}</div>`;
+                    chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
+                    document.getElementById("user-input").value = ""; // Clear input
+                }, 1000); // Simulate delay
+            })
+            .catch(error => console.error("Error:", error));
+        }
+
+        // Press "Enter" to send message
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+    </script>
+
+</body>
+</html>
