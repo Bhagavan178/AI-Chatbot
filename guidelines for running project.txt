@@ -1,0 +1,50 @@
+*********how to run the code*******
+1.open terminal and paste these all commands their
+
+pip install flask flask-cors jinja2
+pip install chatterbot chatterbot_corpus
+pip install sqlalchemy==1.3.24
+pip install pysqlite3
+pip install requests
+
+
+2.install postman link
+
+https://www.postman.com/downloads/
+
+3. run python code by "python app.py"
+
+4.
+--Open Postman 
+-- Click on "New" → "HTTP Request".
+--Change the request type to POST.
+-- In the request URL, enter:
+   http://127.0.0.1:5000/get_response
+
+
+5. Add JSON Data in the Body
+--Click on the "Body" tab.
+--Select "raw" (instead of form-data).
+-- Change the format to JSON (next to "Text").
+-- Enter this JSON request:
+
+{
+    "message": "Hello"
+}
+6. Add Headers
+-- Click on the "Headers" tab.
+-- Add a new header:
+
+Key → Content-Type
+Value → application/json
+7. Click "Send" & Check the Response
+Now, click the "Send" button.
+
+ Expected Response in api
+
+{
+    "response": "Hi there! How can I assist you today?"
+}
+
+8.  Open your chatbot in the browser
+👉 http://127.0.0.1:5000/

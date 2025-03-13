@@ -1,0 +1,33 @@
+You: hii
+Bot: hii
+
+You: hello
+Bot: Hi
+
+You: exit
+Bot: Thank you anyway
+
+You: hello
+Bot: Hi
+
+You: tell me a joke
+Bot: Did you hear the one about the mountain goats in the andes? It was "ba a a a a a d".
+
+You: tell me another one
+Bot: sorry, i didn't mean to make you angry.
+
+You: tell me a joke
+Bot: Did you hear the one about the mountain goats in the andes? It was "ba a a a a a d".
+
+You: hello
+Bot: Hello! How are you doing today? Can I help you with something specific?
+
+You: yes what is date
+Bot: I'm not sure about that. Could you please rephrase or ask something else?
+
+You: & C:/Users/devar/AppData/Local/Programs/Python/Python312/python.exe c:/Users/devar/OneDrive/Desktop/Webchat/chatbot.py
+Bot: I'm not sure about that. Could you please rephrase or ask something else?
+
+You: hello
+Bot: Hello! How are you doing today? Can I help you with something specific?
+
